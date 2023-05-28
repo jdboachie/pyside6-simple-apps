@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+"""
+A Simple Notepad clone
+
+"""
 import os
 import sys
 
@@ -22,8 +27,17 @@ from PySide6.QtPrintSupport import QPrintDialog
 
 
 class MainWindow(QMainWindow):
+    """
+    Subclasses QMainWindow to create the Notepad window
+
+    Args:
+        QMainWindow
+    """
     
     def __init__(self, ):
+        """
+        Defines the Window Initialization
+        """
         super(MainWindow, self).__init__()
         
         # Window Setup
@@ -43,10 +57,6 @@ class MainWindow(QMainWindow):
         
         # path of the currently opened file
         self.path = ""
-        
-        # container = QWidget()
-        # container.setLayout(layout)
-        # self.setCentralWidget(container)
         
         self.status = QStatusBar()
         self.setStatusBar(self.status)
@@ -120,15 +130,22 @@ class MainWindow(QMainWindow):
         self.show()
     
     def dialog_critical(self, msg):
+        """Generates a Critical Dialog Box
+
+        Args:
+            msg (string): Message to be displayed
+        """
         dialog = QMessageBox(self)
         dialog.setText(msg)
         dialog.setIcon(QMessageBox.Critical)
         dialog.show()
     
     def edit_toggle_wrap(self, ):
-        self.editor.setLineWrapMode()
+        """Toggles the Wrap Text to Window Option"""
+        self.editor.setLineWrapMode(QPlainTextEdit.WidgetWidth if self.editor.lineWrapMode() == QPlainTextEdit.NoWrap else QPlainTextEdit.NoWrap)
     
     def file_open(self, ):
+        """Opens a File Dialog Box to Open a File"""
         path, _ = QFileDialog.getOpenFileName(
             self,
             "Open",
@@ -150,18 +167,21 @@ class MainWindow(QMainWindow):
                 self.update_title()
     
     def file_print(self, ):
+        """Opens a Print Dialog Box to Print the Current Document"""
         dialog = QPrintDialog()
         
         if dialog.exec_():
             self.editor.print_(dialog.printer())
     
     def file_save(self, ):
+        """Saves the Current Document"""
         if self.path == "" or None:
             self.file_save_as()
         
         self.save_to_path(self.path)
     
     def file_save_as(self, ):
+        """Opens a File Dialog Box to Save the Current Document"""
         path, _ = QFileDialog.getSaveFileName(
             self,
             "Save As",
@@ -172,6 +192,11 @@ class MainWindow(QMainWindow):
             self.save_to_path(path)
     
     def save_to_path(self, path):
+        """Saves the Current Document to the Specified Path
+
+        Args:
+            path (string): Path to Save the Document
+        """
         text = self.editor.toPlainText()
         
         try:
@@ -186,6 +211,7 @@ class MainWindow(QMainWindow):
             self.update_title()
     
     def update_title(self):
+        """Updates the Title of the Window"""
         self.setWindowTitle("{} - Notepad".format(os.path.basename(self.path) if self.path else "Untitled"))
 
 
