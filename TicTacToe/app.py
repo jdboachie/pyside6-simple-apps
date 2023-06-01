@@ -7,6 +7,7 @@ class TicTacToe(QWidget):
         super().__init__()
 
         self.setWindowTitle("TicTacToe")
+        self.setFixedSize(350, 350)
         self.layout = QGridLayout()
 
         self.player = "X"
