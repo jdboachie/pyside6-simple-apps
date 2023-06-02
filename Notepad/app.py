@@ -42,6 +42,7 @@ class MainWindow(QMainWindow):
         
         # Window Setup
         self.setWindowTitle("Notepad")
+        self.setWindowIcon(QIcon(os.path.join("Notepad/images", "notepad")))
         self.setMinimumSize(700, 500)
         
         layout = QVBoxLayout()

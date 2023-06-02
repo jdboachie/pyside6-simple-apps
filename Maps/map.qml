@@ -15,10 +15,10 @@ Item {
         anchors.fill: parent
         plugin: mapPlugin
 
-        center {
-            latitude: 7.652
-            longitude: -1.419
-        }
+        // center {
+        //     latitude: 7.652
+        //     longitude: -1.419
+        // }
     }
     
     MouseArea {
