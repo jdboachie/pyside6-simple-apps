@@ -2,8 +2,8 @@ import QtQuick 2.15
 import QtLocation 5.15
 
 Item {
-    width: 1000
-    height: 700
+    width: 1100
+    height: 650
 
     Plugin {
         id: mapPlugin
@@ -15,10 +15,12 @@ Item {
         anchors.fill: parent
         plugin: mapPlugin
 
-        // center {
-        //     latitude: 7.652
-        //     longitude: -1.419
-        // }
+        center {
+            latitude: 6.67574
+            longitude: -1.55681
+        }
+
+        zoomLevel: 14
     }
     
     MouseArea {
